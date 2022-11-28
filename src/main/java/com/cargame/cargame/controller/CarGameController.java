@@ -46,7 +46,7 @@ public class CarGameController {
     @PostMapping(value="/setLives",consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<String> setLives(@RequestBody MoveDirection lives){
     	carService.setLives(lives.dir);
-    	return new ResponseEntity<String>(HttpStatus.OK);
+    	return new ResponseEntity<>(HttpStatus.OK);
     }
     
 }
