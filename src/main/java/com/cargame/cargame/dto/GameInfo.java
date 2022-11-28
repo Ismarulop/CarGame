@@ -6,4 +6,5 @@ public class GameInfo {
 	public int lives;
 	public String turnMessage;
 	public int gameState;
+	
 }

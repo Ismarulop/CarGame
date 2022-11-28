@@ -277,6 +277,13 @@ public class CarService {
 		if(this.gameInfo == null) {
 			return null;
 		}
+		if(this.gameInfo.gameState == 1 || this.gameInfo.lives == 0) {
+			this.gameInfo.turnMessage = "";
+			this.gameInfo.turnMessage += "GAME IS OVER. \nStart a new game.";
+
+			this.gameInfo.gameState = 1;
+			return this.gameInfo;
+		}
 		
 		this.gameInfo.turnMessage = "";
 		MapEntity map = this.gameInfo.map;
@@ -285,10 +292,6 @@ public class CarService {
 		int lives = this.gameInfo.lives;
 		int turns = this.gameInfo.turnsPlayed;
 		
-		if(this.gameInfo.gameState == 1) {
-			this.gameInfo.turnMessage += "GAME IS OVER. \n Start a new game.";
-			return this.gameInfo;
-		}
 		
 		playTurn(map, moveDir);
 		
@@ -313,6 +316,7 @@ public class CarService {
 		if (lives == 0) {
 			this.gameInfo.turnMessage += "GAME OVER !";
 			log.info("GAME OVER !");
+			this.gameInfo.gameState = 1;
 		} else if (turns == 100) {
 			log.info("VICTORY!");
 			this.gameInfo.turnMessage += "VICTORY!\n";
@@ -323,6 +327,10 @@ public class CarService {
 		this.gameInfo.turnsPlayed = turns;
 
 		return this.gameInfo;
+	}
+	
+	public void setLives(int lives) {
+		this.gameInfo.lives = lives;
 	}
 
 }

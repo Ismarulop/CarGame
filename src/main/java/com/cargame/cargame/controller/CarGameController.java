@@ -31,7 +31,7 @@ public class CarGameController {
     	return new ResponseEntity<>(gameInfo,HttpStatus.OK);
     }
     
-    @PostMapping(value = "/playTurn",consumes = APPLICATION_JSON_VALUE,produces = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/playTurn",consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<GameInfo> playTurn(@RequestBody MoveDirection move){
     	
     	int moveDir = move.dir;
@@ -41,6 +41,12 @@ public class CarGameController {
     	
     	GameInfo gameInfo = carService.playMove(moveDir);
     	return new ResponseEntity<>(gameInfo,HttpStatus.OK);
+    }
+    
+    @PostMapping(value="/setLives",consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> setLives(@RequestBody MoveDirection lives){
+    	carService.setLives(lives.dir);
+    	return new ResponseEntity<String>(HttpStatus.OK);
     }
     
 }
